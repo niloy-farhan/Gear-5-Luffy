@@ -1,11 +1,16 @@
-const image = new image();
+// Create an image object
+const image = new Image();
 image.src = "./lll.png";
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContex("2d");
 
+// Get the canvas and its 2d context
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d"); // Corrected typo: getContex -> getContext
+
+// Set the canvas dimensions to match the window size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// Wait for the image to load before initializing the particle effect
 image.addEventListener("load", function () {
   class Particle {
     constructor(effect, x, y, color) {
@@ -40,9 +45,9 @@ image.addEventListener("load", function () {
       }
 
       this.x +=
-        (this.vs *= this.friction) + (this.originX - this.x) * this.ease;
+        (this.vx *= this.friction) + (this.originX - this.x) * this.ease; // Corrected variable name from vs to vx
       this.y +=
-        (this.vs *= this.friction) + (this.originy - this.y) * this.ease;
+        (this.vy *= this.friction) + (this.originY - this.y) * this.ease; // Corrected variable name from vs to vy
     }
     draw() {
       ctx.fillStyle = this.color;
@@ -52,7 +57,7 @@ image.addEventListener("load", function () {
 
   class Effect {
     constructor(width, height) {
-      this.widh = width;
+      this.width = width; // Corrected typo: widh -> width
       this.height = height;
       this.image = image;
       this.particlesArray = [];
@@ -60,26 +65,27 @@ image.addEventListener("load", function () {
       this.centerY = this.height * 0.5;
       this.x = this.centerX - this.image.width * 0.5;
       this.y = this.centerY - this.image.height * 0.5;
-      this.gap = 4;
-      this.gap = 4;
+      this.gap = 2;
       this.mouse = {
-        radius: 3000,
+        radius: 20000,
         x: 0,
         y: 0,
       };
 
       window.addEventListener("mousemove", (event) => {
-        this.mouse.x = event.x;
-        this.mouse.y = event.y;
+        this.mouse.x = event.clientX; // Use clientX and clientY for mouse coordinates
+        this.mouse.y = event.clientY;
       });
     }
 
     update() {
-      this.particlesArry.forEach((p) => p.update());
+      this.particlesArray.forEach((p) => p.update());
     }
+
     draw() {
-      this.particlesArry.forEach((p) => p.draw());
+      this.particlesArray.forEach((p) => p.draw());
     }
+
     init() {
       ctx.drawImage(this.image, this.x, this.y);
       const pixel = ctx.getImageData(0, 0, this.width, this.height).data;
@@ -93,7 +99,7 @@ image.addEventListener("load", function () {
           const c = `rgb(${r}, ${g}, ${b})`;
 
           if (a > 0) {
-            this.particlesArry.push(new Particle(this, x, y, c));
+            this.particlesArray.push(new Particle(this, x, y, c));
           }
         }
       }
@@ -104,7 +110,7 @@ image.addEventListener("load", function () {
   effect.init();
 
   function animate() {
-    effect.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Use ctx.clearRect to clear the canvas
     effect.update();
     effect.draw();
     requestAnimationFrame(animate);
