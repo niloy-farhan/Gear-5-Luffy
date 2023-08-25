@@ -1,6 +1,7 @@
 // Create an image object
 const image = new Image();
 image.src = "./lll.png";
+console.log("Hello, World!");
 
 // Get the canvas and its 2d context
 const canvas = document.getElementById("canvas");
@@ -67,7 +68,7 @@ image.addEventListener("load", function () {
       this.y = this.centerY - this.image.height * 0.5;
       this.gap = 2;
       this.mouse = {
-        radius: 20000,
+        radius: 40000,
         x: 0,
         y: 0,
       };
