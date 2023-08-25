@@ -1,0 +1,24 @@
+{
+  "name": "gear5",
+  "version": "1.0.0",
+  "description": "Luffy-Gear-5-Particle-Effect using Html Canvas",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niloy-farhan/gear-5-luffy.git"
+  },
+  "keywords": [
+    "Luffy",
+    "Gear",
+    "5"
+  ],
+  "author": "Niloy Farhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niloy-farhan/gear-5-luffy/issues"
+  },
+  "homepage": "https://github.com/niloy-farhan/gear-5-luffy#readme"
+}
